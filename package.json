@@ -5,7 +5,11 @@
   "scripts": {
     "dev:weapp": "taro build --type weapp --watch",
     "build:weapp": "taro build --type weapp",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "server:dev": "npm --prefix server run dev",
+    "server:build": "npm --prefix server run build",
+    "server:test": "npm --prefix server test",
+    "test": "node --test --test-isolation=none test/*.test.cjs"
   },
   "dependencies": {
     "@tarojs/components": "4.1.9",
@@ -26,6 +30,12 @@
     "@types/react": "^18.3.0",
     "@types/node": "^22.0",
     "typescript": "~5.7.3",
-    "sass": "^1.80.0"
+    "sass": "^1.80.0",
+    "babel-preset-taro": "4.1.9",
+    "@babel/preset-react": "7.26.3",
+    "react-refresh": "0.14.2"
+  },
+  "engines": {
+    "node": ">=22.8.0"
   }
 }

@@ -4,3 +4,5 @@ dist/
 *.log
 .env*
 project.private.config.json
+.swc/
+coverage/

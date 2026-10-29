@@ -4,7 +4,24 @@
 
 ## 项目状态
 
-目前处于初始化阶段；功能仍待开发及真实设备验证。
+已有课程样例、录音回放和本地打卡，并新增 NestJS Mock 逐轮口语练习基础流程；真实 AI、完整学习功能和真机验证仍待完成。
+
+## 本地开发
+
+使用 Node.js 22.8+（当前验证版本 24.19.0）：
+
+```bash
+npm ci
+npm --prefix server ci
+npm run typecheck
+npm test
+npm run server:test
+npm run build:weapp
+```
+
+两个终端分别运行 `npm run server:dev` 和 `npm run dev:weapp`。微信开发者工具导入仓库根目录，在首页打开“逐轮口语练习 · Mock”，连接本地服务。服务端仅监听本机，不支持直接在手机上联调。
+
+安装、接口、模拟费用、测试范围与中国大陆上线前检查见 [Mock 口语练习说明](docs/MOCK_SPEAKING.md)。本次没有调用真实付费 API，也没有购买云资源。
 
 ## 功能规划
 

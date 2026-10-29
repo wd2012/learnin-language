@@ -23,7 +23,7 @@
 - POST /api/conversation/turn：传入场景、历史对话、文本，返回AI回复及语言纠错结构。
 - POST /api/speech/synthesize：文本转语音。
 - GET /api/dictionary/search?q=&lang=：词汇查询；必须标明来源并尊重授权。
-以上仅为待实现协议，不应把未实现接口当作已存在。
+语音转写、对话和合成接口现已实现本地 Mock 版本，并新增 `/api/session` 与 `/api/usage/monthly`。词典接口与真实服务商适配仍待实现；不要将 Mock 接口等同于真实语音和 AI 能力。详见 [Mock 口语练习说明](MOCK_SPEAKING.md)。
 
 ## 5. 数据结构建议
 - Lesson(id, language, level, title, segments[], vocabIds[], tasks[])。
@@ -47,14 +47,14 @@
 3. npm run build:weapp。
 4. 微信开发者工具模拟器基础功能测试。
 5. 真机检验麦克风权限、录音回放、音频控制和网络域名。
-每轮提交记录实际测试的命令、结果及无法验证项。当前仓库尚未通过上述全部验证。
+每轮提交记录实际测试的命令、结果及无法验证项。当前安装、类型检查、微信构建和本地 Mock 自动化测试已通过；开发者工具交互与真机验证仍未完成。
 
 
 ## 8. 中国大陆优先：国内AI与语音架构
 - 前端仍为微信小程序 Taro + React + TypeScript + Zustand；新增国内可用的 NestJS 服务端，处理 ASR、TTS、LLM，绝不在小程序中存储服务商密钥。
 - 候选方案：腾讯云语音识别ASR（逐项验证英语/日语引擎）、腾讯云或其他国内服务商 TTS（逐项验证英日音色及接口）、阿里云百炼文本模型（验证国内地域、网络及费用）。这只是待验证的初选，不代表已完成采购或接入。
 - 实现适配器层：SpeechToTextProvider、TextToSpeechProvider、ChatProvider，包含 mock 实现，便于在没有密钥时开发与自动化测试。
-- 接口草案：POST /api/speech/transcribe（multipart，音频、语言、大小和时长校验）；POST /api/conversation/turn（语言、场景、可修正的识别文本、有限历史，返回结构化纠错及追问）；POST /api/speech/synthesize（语言、文本、音色）；GET /api/usage/monthly（用量、估算金额、预算提示）。所有接口待实现，不要认为已经可用。
+- 接口设计：POST /api/speech/transcribe（multipart，音频、语言、大小和时长校验）；POST /api/conversation/turn（语言、场景、可修正的识别文本、有限历史，返回结构化纠错及追问）；POST /api/speech/synthesize（当前为语言、文本；音色待真实适配时添加）；GET /api/usage/monthly（用量、估算金额、预算提示）。当前这些接口仅有本地 Mock 实现，纠错字段回显原句，TTS返回提示音，金额与Token为演示估算。
 - 逐轮链路：小程序录音 → 安全HTTPS上传 → ASR → 用户核对/可修改识别文本 → LLM纠错及追问 → TTS语音 → 小程序播放。错误降级：ASR失败可手动输入，TTS失败展示文本，LLM失败仍可离线学习。
 - 预算：目标20–50元/月。分别计量ASR时长、LLM输入输出token、TTS字数/时长，限制单次时长、请求频率和token数量；实现每月应用层软预算和提醒；另在云厂商侧设账单告警。应用层软限额不等于绝对硬封顶，还要计入服务器、域名、流量费用。
 - 安全与合规：后端鉴权、限流、上传格式/大小验证、私有配置、HTTPS、最少必要日志和语音数据留存周期。体验版同样要验证合法请求/上传/下载域名、微信权限、国内服务器及域名备案要求。
