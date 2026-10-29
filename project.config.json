@@ -1,0 +1,12 @@
+{
+  "description": "LinguaPath bilingual learning MVP",
+  "miniprogramRoot": "dist/",
+  "projectname": "LinguaPath",
+  "appid": "touristappid",
+  "compileType": "miniprogram",
+  "setting": {
+    "es6": true,
+    "minified": true,
+    "urlCheck": false
+  }
+}
