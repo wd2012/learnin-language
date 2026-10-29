@@ -4,7 +4,7 @@ export type Language = 'en' | 'ja';
 export type Scene = 'interview' | 'daily';
 export interface Message { role: 'user' | 'assistant'; text: string }
 export interface Feedback { correction: string; naturalRewrite: string; example: string; explanation: string; encouragement: string }
-export interface Reply { text: string; feedback: Feedback; mock: boolean }
+export interface Reply { text: string; feedback: Feedback; mock: boolean; providerUsage?: { inputTokens: number; outputTokens: number } }
 export interface Audio { audioBase64: string; mimeType: 'audio/wav' | 'audio/mpeg'; kind: 'mock-tone' | 'speech'; mock: boolean }
 // Future providers must support cancellation; no paid implementation is registered.
 export interface AsrProvider {

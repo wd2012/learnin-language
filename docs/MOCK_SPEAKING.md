@@ -33,7 +33,7 @@ npm run dev:weapp
 
 ## Provider 和接口
 
-`server/src/providers.ts` 定义 ASR、LLM、TTS 接口与 Nest 注入标识。接口接受 `AbortSignal`；只有 Mock 实现被注册，没有真实供应商 SDK 或网络调用。新增真实实现时必须继续保留取消、输入校验、费用计量与错误处理，并验证供应商响应结构。
+`server/src/providers.ts` 定义 ASR、LLM、TTS 接口与 Nest 注入标识。接口接受 `AbortSignal`；HTTP服务只有 Mock 实现被注册，不会发起真实供应商请求。另有独立的腾讯云／百炼适配器及手动验证入口，见 [真实 Provider 指引](REAL_PROVIDERS.md)；它们尚未通过真实服务验证。新增真实实现时必须继续保留取消、输入校验、费用计量与错误处理，并验证供应商响应结构。
 
 - ASR：接受音频，但返回按语言选择的固定演示文本，不读取音频中的词语；前端明确标记且允许修改。
 - LLM：按语言、场景和最近上下文轮数返回固定追问；纠错与改写字段仅回显原句，示例为固定内容。不是实际语法评估，也没有发音评分。
