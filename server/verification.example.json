@@ -1,0 +1,20 @@
+{
+  "prices": {
+    "asrMicrosPerSecond": { "en": null, "ja": null },
+    "ttsMicrosPerCharacter": { "en": null, "ja": null },
+    "llmInputMicrosPerToken": null,
+    "llmOutputMicrosPerToken": null
+  },
+  "cases": [
+    {
+      "language": "en",
+      "scene": "interview",
+      "audioFiles": ["audio/en-1.wav", "audio/en-2.wav", "audio/en-3.wav", "audio/en-4.wav", "audio/en-5.wav"]
+    },
+    {
+      "language": "ja",
+      "scene": "daily",
+      "audioFiles": ["audio/ja-1.wav", "audio/ja-2.wav", "audio/ja-3.wav", "audio/ja-4.wav", "audio/ja-5.wav"]
+    }
+  ]
+}

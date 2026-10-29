@@ -23,7 +23,7 @@
 - POST /api/conversation/turn：传入场景、历史对话、文本，返回AI回复及语言纠错结构。
 - POST /api/speech/synthesize：文本转语音。
 - GET /api/dictionary/search?q=&lang=：词汇查询；必须标明来源并尊重授权。
-语音转写、对话和合成接口现已实现本地 Mock 版本，并新增 `/api/session` 与 `/api/usage/monthly`。词典接口与真实服务商适配仍待实现；不要将 Mock 接口等同于真实语音和 AI 能力。详见 [Mock 口语练习说明](MOCK_SPEAKING.md)。
+语音转写、对话和合成接口现已实现本地 Mock 版本，并新增 `/api/session` 与 `/api/usage/monthly`。词典接口仍待实现；真实服务商适配器已添加独立验证入口，但尚未接入HTTP服务或通过真实服务验证；不要将 Mock 接口等同于真实语音和 AI 能力。详见 [Mock 口语练习说明](MOCK_SPEAKING.md)。
 
 ## 5. 数据结构建议
 - Lesson(id, language, level, title, segments[], vocabIds[], tasks[])。
@@ -59,3 +59,8 @@
 - 预算：目标20–50元/月。分别计量ASR时长、LLM输入输出token、TTS字数/时长，限制单次时长、请求频率和token数量；实现每月应用层软预算和提醒；另在云厂商侧设账单告警。应用层软限额不等于绝对硬封顶，还要计入服务器、域名、流量费用。
 - 安全与合规：后端鉴权、限流、上传格式/大小验证、私有配置、HTTPS、最少必要日志和语音数据留存周期。体验版同样要验证合法请求/上传/下载域名、微信权限、国内服务器及域名备案要求。
 - 禁止未经同意上传录音；默认不永久存储录音或个人对话正文。不要硬编码供应商价格、模型版本、AppID、AppSecret。供应商接入前需要用英语和日语真实录音验证效果、时延和成本。
+
+
+## 9. 真实 Provider 准备阶段
+
+`server/src/provider-adapters/` 包含腾讯云 ASR／TTS、百炼兼容 LLM 适配器，默认禁止付费请求。当前HTTP应用继续注册Mock；独立验证入口在显式 `--allow-paid`、本机安全凭据、已核实的模型／音色／单价和外部私有录音清单都齐备后，才能执行英日各5轮验证。用户已授权本次验证不超过5元，随后指定先完成代码与开通指引，因此本轮真实调用为0。当前步骤、未验证项与预算算法边界见 [真实 Provider 指引](REAL_PROVIDERS.md)。

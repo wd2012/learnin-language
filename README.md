@@ -23,6 +23,8 @@ npm run build:weapp
 
 安装、接口、模拟费用、测试范围与中国大陆上线前检查见 [Mock 口语练习说明](docs/MOCK_SPEAKING.md)。本次没有调用真实付费 API，也没有购买云资源。
 
+真实腾讯云 ASR／TTS 和百炼 LLM 适配器、零付费预检、服务开通与5元额度内的独立验证步骤见 [真实 Provider 指引](docs/REAL_PROVIDERS.md)。现有小程序和HTTP服务继续使用Mock；真实验证命令默认不发送付费请求。
+
 ## 功能规划
 
 - 英语日常交流、技术英语、软件工程师面试练习
