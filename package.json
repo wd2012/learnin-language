@@ -1,0 +1,31 @@
+{
+  "name": "linguapath-mini",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev:weapp": "taro build --type weapp --watch",
+    "build:weapp": "taro build --type weapp",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tarojs/components": "4.1.9",
+    "@tarojs/helper": "4.1.9",
+    "@tarojs/plugin-framework-react": "4.1.9",
+    "@tarojs/plugin-platform-weapp": "4.1.9",
+    "@tarojs/react": "4.1.9",
+    "@tarojs/runtime": "4.1.9",
+    "@tarojs/taro": "4.1.9",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "zustand": "5.0.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@tarojs/cli": "4.1.9",
+    "@tarojs/webpack5-runner": "4.1.9",
+    "@types/react": "^18.3.0",
+    "@types/node": "^22.0",
+    "typescript": "~5.7.3",
+    "sass": "^1.80.0"
+  }
+}
